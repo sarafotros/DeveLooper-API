@@ -14,8 +14,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_122440) do
 
   create_table "compositions", force: :cascade do |t|
     t.string "name"
-    t.string "bin_data"
-    t.string "mime_type"
+    t.string "layout"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_122440) do
   create_table "sound_samples", force: :cascade do |t|
     t.string "name"
     t.binary "bin_data", limit: 1048576
+    t.string "mime_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(version: 2020_02_11_122440) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "compositions", "users"

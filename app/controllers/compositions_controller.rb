@@ -25,7 +25,7 @@ def update
 private
 
 def composition_params
-    params.require(:composition).permit(:name, :bin_data, :mime_type, :user_id)
+    params.require(:composition).permit(:name, :layout, :user_id)
   end
 
 
