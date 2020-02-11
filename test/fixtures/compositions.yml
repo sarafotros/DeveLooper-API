@@ -2,10 +2,12 @@
 
 one:
   name: MyString
-  layout: MyString
+  bin_data: MyString
+  mime_type: MyString
   user: one
 
 two:
   name: MyString
-  layout: MyString
+  bin_data: MyString
+  mime_type: MyString
   user: two
