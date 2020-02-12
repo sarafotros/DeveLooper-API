@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     # before_action :set_user, only: [:show]
 
     def show
-        @user = User.find_by_email(params[:email])
+        @user = User.find(params[:id])
         
         # # If the user exists AND the email entered is correct.
         # if !(user && user.authenticate(params[:email]))
