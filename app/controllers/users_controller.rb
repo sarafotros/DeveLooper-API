@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :create]
+    # before_action :set_user, only: [:show]
 
     def show
-        
         user = User.find_by_email(params[:email])
         # If the user exists AND the password entered is correct.
         if !(user && user.authenticate(params[:password]))
           session[:user_id] = nil
-          flash[:notice] = "Sorry we can't find those details..."
+          # flash[:notice] = "Sorry we can't find those details..."
         else
-          flash[:notice] = "You have logged in successfully!"
+          # flash[:notice] = "You have logged in successfully!"
           session[:user_id] = user.id
           render json: @user
         end
@@ -17,20 +16,20 @@ class UsersController < ApplicationController
     
       def create
         @user = User.create(user_params)
-        if user.valid?
-          session[:user_id] = user.id
+        if @user.valid?
+          session[:user_id] = @user.id
           render json: @user, status: :created, location: @user
         else
-        flash[:errors] = user.errors.full_messages
+        # flash[:errors] = @user.errors.full_messages
         render json: @user.errors, status: :unprocessable_entity          
         end
       end
 
     private
     
-    def set_user
-      @user = User.find(params[:id])
-    end
+    # def set_user
+    #   @user = User.find(params[:id])
+    # end
 
     def user_params
       params.require(:user).permit(:name, :email)
