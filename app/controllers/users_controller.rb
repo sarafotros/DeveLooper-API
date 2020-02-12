@@ -2,16 +2,17 @@ class UsersController < ApplicationController
     # before_action :set_user, only: [:show]
 
     def show
-        user = User.find_by_email(params[:email])
-        # If the user exists AND the password entered is correct.
-        if !(user && user.authenticate(params[:password]))
-          session[:user_id] = nil
-          # flash[:notice] = "Sorry we can't find those details..."
-        else
-          # flash[:notice] = "You have logged in successfully!"
-          session[:user_id] = user.id
+        @user = User.find_by_email(params[:email])
+        
+        # # If the user exists AND the email entered is correct.
+        # if !(user && user.authenticate(params[:email]))
+        #   session[:user_id] = nil
+        #   # flash[:notice] = "Sorry we can't find those details..."
+        # else
+        #   # flash[:notice] = "You have logged in successfully!"
+        #   session[:user_id] = user.id
           render json: @user
-        end
+        # end
       end
     
       def create
