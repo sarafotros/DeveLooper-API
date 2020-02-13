@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_122440) do
   create_table "compositions", force: :cascade do |t|
     t.string "name"
     t.string "layout"
+    t.integer "bpm"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

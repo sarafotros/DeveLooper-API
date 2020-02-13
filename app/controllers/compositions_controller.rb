@@ -1,10 +1,18 @@
-class CompositionsController < 
-    
+class CompositionsController < ApplicationController
+    require 'byebug'
 def show
-    render @json :composition
+    @composition = Composition.find(params[:id])
+    render json: @composition
+end
+
+def list
+  # byebug
+  @composition = Composition.where(user_id: params[:user_id])
+  render json: @composition
 end
 
 def create
+  # byebug
     @composition = Composition.new(composition_params)
     if @composition.save
         render json: @composition, status: :created, location: @composition
@@ -25,7 +33,7 @@ def update
 private
 
 def composition_params
-    params.require(:composition).permit(:name, :layout, :user_id)
+    params.require(:composition).permit(:name, :layout, :bpm, :user_id)
   end
 
 

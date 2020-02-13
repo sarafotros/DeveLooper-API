@@ -1,38 +1,28 @@
 class UsersController < ApplicationController
-    # before_action :set_user, only: [:show]
 
-    def show
-        @user = User.find(params[:id])
-        
-        # # If the user exists AND the email entered is correct.
-        # if !(user && user.authenticate(params[:email]))
-        #   session[:user_id] = nil
-        #   # flash[:notice] = "Sorry we can't find those details..."
-        # else
-        #   # flash[:notice] = "You have logged in successfully!"
-        #   session[:user_id] = user.id
+  require 'byebug'
+    
+
+    def login
+        @user = User.find_by(email: user_params[:email])
+
           render json: @user
-        # end
+     
       end
     
       def create
         @user = User.create(user_params)
-        if @user.valid?
-          session[:user_id] = @user.id
+        # if @user.valid?
+        #   session[:user_id] = @user.id
           render json: @user, status: :created, location: @user
-        else
-        # flash[:errors] = @user.errors.full_messages
-        render json: @user.errors, status: :unprocessable_entity          
-        end
+        # else
+        # render json: @user.errors, status: :unprocessable_entity          
+        # end
       end
 
     private
     
-    # def set_user
-    #   @user = User.find(params[:id])
-    # end
-
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :id)
     end
 end
